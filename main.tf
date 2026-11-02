@@ -117,6 +117,7 @@ resource "docker_container" "grafana" {
   # Persistencia de configuraciones, paneles y usuarios de Grafana
   volumes {
     volume_name    = docker_volume.datos_grafana.name
+    coin
     container_path = "/var/lib/grafana"
   }
 }
