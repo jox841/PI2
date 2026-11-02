@@ -55,7 +55,7 @@ resource "docker_container" "mariadb" {
   
   # Persistencia de datos de MariaDB
   volumes {
-    volume_name    = docker_volume.datos_mariadb.name
+    host_path      = "${path.cwd}/volumenes/datos-MariaDB"
     container_path = "/var/lib/mysql"
   }
 }
@@ -78,7 +78,7 @@ resource "docker_container" "apache" {
 
   # Persistencia de los archivos web de Apache
   volumes {
-    volume_name    = docker_volume.datos_apache.name
+    host_path      = "${path.cwd}/volumenes/datos-Apache"
     container_path = "/usr/local/apache2/htdocs/"
   }
 }
@@ -116,8 +116,7 @@ resource "docker_container" "grafana" {
 
   # Persistencia de configuraciones, paneles y usuarios de Grafana
   volumes {
-    volume_name    = docker_volume.datos_grafana.name
-    coin
+    host_path      = "${path.cwd}/volumenes/datos-Grafana"
     container_path = "/var/lib/grafana"
   }
 }
