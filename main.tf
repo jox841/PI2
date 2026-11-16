@@ -22,8 +22,16 @@ resource "docker_container" "mariadb" {
   image = "mariadb:11"
   env = [
     "MYSQL_ROOT_PASSWORD=${var.db_root_password}",
-    "MYSQL_DATABASE=${var.db_name}"
+    "MYSQL_DATABASE=${var.db_name}",
+    "MYSQL_USER=${var.db_user}",
+    "MYSQL_PASSWORD=${var.db_password}"
   ]
+
+  # Script de inicialización: crea las tablas al primer arranque
+  upload {
+    file    = "/docker-entrypoint-initdb.d/init.sql"
+    content = file("${path.cwd}/sql/init.sql")
+  }
 
   networks_advanced {
     name = docker_network.red_backend.name

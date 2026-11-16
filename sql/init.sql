@@ -1,0 +1,18 @@
+USE mi_web_db;
+
+CREATE TABLE IF NOT EXISTS usuarios (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  email VARCHAR(150) NOT NULL UNIQUE,
+  creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS productos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(150) NOT NULL,
+  precio DECIMAL(10,2) NOT NULL,
+  stock INT DEFAULT 0
+);
+
+INSERT INTO productos (nombre, precio, stock) VALUES
+  ('Producto de ejemplo', 9.99, 10);
